@@ -8,10 +8,11 @@ use Yii;
  * This is the model class for table "posts".
  *
  * @property int $id
- * @property string $title
- * @property string $text
  * @property int $user_id
- * @property string $alias
+ * @property string $title
+ * @property string $body
+ *
+ * @property User $user
  */
 class Posts extends \yii\db\ActiveRecord
 {
@@ -29,9 +30,11 @@ class Posts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['user_id'], 'required'],
             [['user_id'], 'integer'],
-            [['title', 'alias'], 'string', 'max' => 200],
-            [['text'], 'string', 'max' => 2000],
+            [['body'], 'string'],
+            [['title'], 'string', 'max' => 255],
+            [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
 
@@ -42,13 +45,15 @@ class Posts extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'text' => 'Text',
             'user_id' => 'User ID',
-            'alias' => 'Alias',
+            'title' => 'Title',
+            'body' => 'Body',
         ];
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);

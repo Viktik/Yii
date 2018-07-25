@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Posts;
+use common\models\posts;
 
 /**
- * PostsSearch represents the model behind the search form of `common\models\Posts`.
+ * PostsSearch represents the model behind the search form of `common\models\posts`.
  */
-class PostsSearch extends Posts
+class PostsSearch extends posts
 {
     /**
      * {@inheritdoc}
@@ -19,7 +19,7 @@ class PostsSearch extends Posts
     {
         return [
             [['id', 'user_id'], 'integer'],
-            [['title', 'text', 'alias'], 'safe'],
+            [['title', 'body'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class PostsSearch extends Posts
      */
     public function search($params)
     {
-        $query = Posts::find();
+        $query = posts::find();
 
         // add conditions that should always apply here
 
@@ -64,8 +64,7 @@ class PostsSearch extends Posts
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'text', $this->text])
-            ->andFilterWhere(['like', 'alias', $this->alias]);
+            ->andFilterWhere(['like', 'body', $this->body]);
 
         return $dataProvider;
     }

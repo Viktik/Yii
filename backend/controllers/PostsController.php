@@ -3,14 +3,14 @@
 namespace backend\controllers;
 
 use Yii;
-use common\models\Posts;
+use common\models\posts;
 use backend\models\PostsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PostsController implements the CRUD actions for Posts model.
+ * PostsController implements the CRUD actions for posts model.
  */
 class PostsController extends Controller
 {
@@ -30,7 +30,7 @@ class PostsController extends Controller
     }
 
     /**
-     * Lists all Posts models.
+     * Lists all posts models.
      * @return mixed
      */
     public function actionIndex()
@@ -45,7 +45,7 @@ class PostsController extends Controller
     }
 
     /**
-     * Displays a single Posts model.
+     * Displays a single posts model.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class PostsController extends Controller
     }
 
     /**
-     * Creates a new Posts model.
+     * Creates a new posts model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Posts();
+        $model = new posts();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class PostsController extends Controller
     }
 
     /**
-     * Updates an existing Posts model.
+     * Updates an existing posts model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -96,7 +96,7 @@ class PostsController extends Controller
     }
 
     /**
-     * Deletes an existing Posts model.
+     * Deletes an existing posts model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -110,15 +110,15 @@ class PostsController extends Controller
     }
 
     /**
-     * Finds the Posts model based on its primary key value.
+     * Finds the posts model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Posts the loaded model
+     * @return posts the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Posts::findOne($id)) !== null) {
+        if (($model = posts::findOne($id)) !== null) {
             return $model;
         }
 
