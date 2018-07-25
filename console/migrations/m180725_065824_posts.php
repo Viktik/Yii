@@ -12,6 +12,13 @@ class m180725_065824_posts extends Migration
      */
     public function safeUp()
     {
+        $this->createTable('posts', [
+            'id' => $this->primaryKey(),
+            'title' => $this->string(200),
+            'text' => $this->string(2000),
+            'user_id' => $this->integer(),
+            'alias' => $this->string(200)
+        ]);
 
     }
 
@@ -20,9 +27,7 @@ class m180725_065824_posts extends Migration
      */
     public function safeDown()
     {
-        echo "m180725_065824_posts cannot be reverted.\n";
-
-        return false;
+        $this->dropTable('posts');
     }
 
     /*
