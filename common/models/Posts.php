@@ -48,4 +48,9 @@ class Posts extends \yii\db\ActiveRecord
             'alias' => 'Alias',
         ];
     }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
 }
