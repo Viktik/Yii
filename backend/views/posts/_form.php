@@ -10,9 +10,19 @@ use yii\widgets\ActiveForm;
 
 <div class="posts-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin();
+    $items = [
+        '0' => 'Bob',
+        '1' => 'Bill',
+        '2' => 'Steve'
+    ];
+    $params = [
+        'prompt' => 'Выберите автора'
+    ];
+    ?>
 
-    <?= $form->field($model, 'user_id')->textInput() ?>
+
+    <?= $form->field($model, 'user_id')->dropDownList($items,$params); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
