@@ -11,11 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="posts-form">
 
     <?php $form = ActiveForm::begin();
-    $items = [
-        '0' => 'Bob',
-        '1' => 'Bill',
-        '2' => 'Steve'
-    ];
+    $items = $users;
     $params = [
         'prompt' => 'Выберите автора'
     ];

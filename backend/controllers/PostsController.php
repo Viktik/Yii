@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use Yii;
 use common\models\posts;
+use common\models\user;
 use backend\models\PostsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -79,8 +80,15 @@ class PostsController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $usersArr = User::find()->select(['id', 'username'])->asArray()->all();
+        foreach ($usersArr as $user) {
+            $users[$user['id']] = $user['username'];
+        }
+
+
         return $this->render('create', [
             'model' => $model,
+            'users' => $users,
         ]);
     }
 
