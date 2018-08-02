@@ -11,14 +11,13 @@ use yii\widgets\ActiveForm;
 <div class="posts-form">
 
     <?php $form = ActiveForm::begin();
-    $items = $users;
     $params = [
         'prompt' => 'Выберите автора'
     ];
     ?>
 
 
-    <?= $form->field($model, 'user_id')->dropDownList($items,$params); ?>
+    <?= $form->field($model, 'user_id')->dropDownList($users,$params); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
 
