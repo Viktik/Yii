@@ -81,10 +81,8 @@ class PostsController extends Controller
         }
 
         $usersArr = User::find()->select(['id', 'username'])->asArray()->all();
-        foreach ($usersArr as $user) {
-            $users[$user['id']] = $user['username'];
-        }
 
+        $users = array_combine(array_column($usersArr, 'id'), array_column($usersArr, 'username'));
 
         return $this->render('create', [
             'model' => $model,
@@ -107,8 +105,13 @@ class PostsController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
+        $usersArr = User::find()->select(['id', 'username'])->asArray()->all();
+
+        $users = array_combine(array_column($usersArr, 'id'), array_column($usersArr, 'username'));
+
         return $this->render('update', [
             'model' => $model,
+            'users' => $users,
         ]);
     }
 
