@@ -82,7 +82,7 @@ class PostsController extends Controller
 
         $usersArr = User::find()->select(['id', 'username'])->asArray()->all();
 
-        $users = array_column($usersArr, 'username', 'id');
+        $users = array_combine(array_column($usersArr, 'id'), array_column($usersArr, 'username'));
 
         return $this->render('create', [
             'model' => $model,
@@ -107,7 +107,7 @@ class PostsController extends Controller
 
         $usersArr = User::find()->select(['id', 'username'])->asArray()->all();
 
-        $users = array_column($usersArr, 'username', 'id');
+        $users = array_combine(array_column($usersArr, 'id'), array_column($usersArr, 'username'));
 
         return $this->render('update', [
             'model' => $model,
