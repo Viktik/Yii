@@ -5,6 +5,7 @@ namespace backend\controllers;
 use common\models\Posts;
 use common\models\User;
 use common\models\Test;
+use yii\base\StaticInstanceInterface;
 
 class SingletonController extends \yii\web\Controller
 {
@@ -23,7 +24,7 @@ class SingletonController extends \yii\web\Controller
             default: $class = false;
         }
 
-        if ($class instanceof \Singleton) {
+        if ($class instanceof StaticInstanceInterface) {
             $result = 'Single';
         } else {
             $result = 'nope';
