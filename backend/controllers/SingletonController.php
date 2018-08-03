@@ -24,7 +24,7 @@ class SingletonController extends \yii\web\Controller
             default: $class = false;
         }
 
-        $class instanceof StaticInstanceInterface ? $result='Single' : $result = 'nope';
+        $result = $class instanceof StaticInstanceInterface ? 'Single' : 'nope';
 
         if (!$class){
             $result = 'class does not exist';
