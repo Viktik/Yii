@@ -21,12 +21,13 @@ class SingletonController extends \yii\web\Controller
             case 'Test':
                 $class = new Test();
                 break;
-            default: $class = false;
+            default:
+                $class = false;
         }
 
         $result = $class instanceof StaticInstanceInterface ? 'Single' : 'nope';
 
-        if (!$class){
+        if (!$class) {
             $result = 'class does not exist';
         }
 
