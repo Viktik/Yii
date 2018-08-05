@@ -50,7 +50,7 @@ class UserController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView(int $id)
+    public function actionView(int $id): object
     {
         return $this->render('view', [
             'model' => $this->findModel($id),
@@ -62,7 +62,7 @@ class UserController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate(): object
     {
         $model = new User();
 
@@ -82,7 +82,7 @@ class UserController extends Controller
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate(int $id)
+    public function actionUpdate(int $id): object
     {
         $model = $this->findModel($id);
 
