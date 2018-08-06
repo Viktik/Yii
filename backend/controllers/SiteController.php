@@ -7,6 +7,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
+use common\models\UploadForm;
+use yii\web\UploadedFile;
 
 /**
  * Site controller
@@ -20,7 +22,7 @@ class SiteController extends Controller
     {
         return [
             'access' => [
-                'class' => AccessControl::className(),
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'actions' => ['login', 'error'],
@@ -28,7 +30,7 @@ class SiteController extends Controller
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'upload'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -62,8 +64,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $model = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload()) {
+                // file is uploaded successfully
+                return;
+            }
+        }
         $user = Yii::$app->user->identity;
-        return $this->render('userPage', compact('user'));
+        return $this->render('userPage', compact('user', 'model'));
     }
 
     /**
@@ -100,4 +111,5 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
+    
 }
