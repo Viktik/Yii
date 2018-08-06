@@ -48,8 +48,8 @@ $this->title = 'My Yii Application';
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
             </div>
         </div>
-        <a href="<?= Yii::$app->urlManager->createUrl(["posts/index"]) ?>" class="btn btn-lg btn-success">Posts</a>
-        <a href="<?= Yii::$app->urlManager->createUrl(["user/index"]) ?>" class="btn btn-lg btn-success">Users</a>
+        <!--<a href="<?/*= Yii::$app->urlManager->createUrl(["posts/index"]) */?>" class="btn btn-lg btn-success">Posts</a>
+        <a href="<?/*= Yii::$app->urlManager->createUrl(["user/index"]) */?>" class="btn btn-lg btn-success">Users</a>-->
 
     </div>
 </div>
