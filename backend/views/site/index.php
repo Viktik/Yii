@@ -3,7 +3,6 @@
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
-print_r($user);
 ?>
 <div class="site-index">
 

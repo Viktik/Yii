@@ -64,17 +64,8 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $model = new UploadForm();
 
-        if (Yii::$app->request->isPost) {
-            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload()) {
-                // file is uploaded successfully
-                return;
-            }
-        }
-        $user = Yii::$app->user->identity;
-        return $this->render('userPage', compact('user', 'model'));
+        return $this->render('index');
     }
 
     /**
@@ -90,7 +81,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return $this->redirect(['profile/index']);
         } else {
             $model->password = '';
 
