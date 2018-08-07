@@ -36,16 +36,15 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         $model = new UploadForm();
+        $user = Yii::$app->user->identity;
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload()) {
+            if ($model->upload($filename = 'user' . $user->id)) {
                 // file is uploaded successfully
-                $user = Yii::$app->user->identity;
                 return $this->render('index', compact('user', 'model'));
             }
         }
-        $user = Yii::$app->user->identity;
         return $this->render('index', compact('user', 'model'));
     }
 }

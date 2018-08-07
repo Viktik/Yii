@@ -1,6 +1,6 @@
 <?php
 use yii\widgets\ActiveForm;
-
+/** @var \common\models\UploadForm $model */
 ?>
 <div class="panel panel-info">
     <div class="panel-heading">
@@ -9,9 +9,12 @@ use yii\widgets\ActiveForm;
     <div class="panel-body">
         <div class="row">
             <div class="col-md-3 col-lg-3 " align="center">
-                <?php if($model->imageFile): ?>
-                    <img src="/uploads/<?= $model->imageFile?>" alt="">
-                <?php endif; ?>
+
+                <?php if (file_exists("uploads/user$user->id.jpg")) { ?>
+                    <img src="/uploads/user<?= $user->id ?>.jpg" width="200" height="211" alt="">
+                <?php } else { ?>
+                    <img src="/uploads/default.jpg" width="200" height="211" alt=""><?php
+                } ?>
                 <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
                 <?= $form->field($model, 'imageFile')->fileInput() ?>
