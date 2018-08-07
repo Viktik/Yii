@@ -41,7 +41,8 @@ class ProfileController extends Controller
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             if ($model->upload()) {
                 // file is uploaded successfully
-                return;
+                $user = Yii::$app->user->identity;
+                return $this->render('index', compact('user', 'model'));
             }
         }
         $user = Yii::$app->user->identity;

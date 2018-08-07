@@ -9,6 +9,9 @@ use yii\widgets\ActiveForm;
     <div class="panel-body">
         <div class="row">
             <div class="col-md-3 col-lg-3 " align="center">
+                <?php if($model->imageFile): ?>
+                    <img src="/uploads/<?= $model->imageFile?>" alt="">
+                <?php endif; ?>
                 <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
                 <?= $form->field($model, 'imageFile')->fileInput() ?>

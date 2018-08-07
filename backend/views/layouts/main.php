@@ -40,7 +40,7 @@ AppAsset::register($this);
         $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
     } else {
         $menuItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Home', 'url' => ['/profile/index']],
             ['label' => 'Menu', 'items' => [
                 ['label' => 'Posts', 'url' => ['/posts/index']],
                 ['label' => 'Users', 'url' => ['/user/index']],
