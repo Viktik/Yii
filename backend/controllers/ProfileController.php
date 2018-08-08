@@ -13,7 +13,11 @@ use  common\models\User;
 
 class ProfileController extends Controller
 {
-    public $userClosed;
+
+    private function getCurrentUser()
+    {
+        return Yii::$app->user->identity;
+    }
 
     public function behaviors()
     {
@@ -39,8 +43,7 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         $model = new UploadForm();
-        $this->userClosed = Yii::$app->user->identity;
-        $user = User::findIdentity($this->userClosed->id);
+        $user = self::getCurrentUser();
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
