@@ -1,5 +1,7 @@
 <?php
 use yii\widgets\ActiveForm;
+use yii\helpers\Html;
+
 /** @var \common\models\UploadForm $model */
 ?>
 <div class="panel panel-info">
@@ -50,6 +52,7 @@ use yii\widgets\ActiveForm;
 
                     </tbody>
                 </table>
+                <?= Html::a('Update', ['update', 'id' => $user->id], ['class' => 'btn btn-primary']) ?>
             </div>
         </div>
     </div>

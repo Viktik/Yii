@@ -54,4 +54,9 @@ class ProfileController extends Controller
         }
         return $this->render('index', compact('user', 'model'));
     }
+
+    public function actionUpdate($id)
+    {
+
+    }
 }
