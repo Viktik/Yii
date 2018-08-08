@@ -14,11 +14,6 @@ use  common\models\User;
 class ProfileController extends Controller
 {
 
-    private function getCurrentUser()
-    {
-        return Yii::$app->user->identity;
-    }
-
     public function behaviors()
     {
         return [
@@ -43,7 +38,7 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         $model = new UploadForm();
-        $user = self::getCurrentUser();
+        $user = $this->findModel();
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
@@ -55,8 +50,21 @@ class ProfileController extends Controller
         return $this->render('index', compact('user', 'model'));
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate()
     {
+        $model = $this->findModel();
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
 
+    protected function findModel()
+    {
+        $id = Yii::$app->user->identity->id;
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }
