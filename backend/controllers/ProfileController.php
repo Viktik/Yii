@@ -52,9 +52,17 @@ class ProfileController extends Controller
 
     public function actionUpdate()
     {
-        $model = $this->findModel();
+        $userModel = $this->findModel();
+
+        if (Yii::$app->request->post()) {
+            $userModel->phone = '555555555555';
+            //$userModel->phone = Yii::$app->request->post('phone');
+            $userModel->save();
+            return $this->redirect(['profile/index']);
+        }
+
         return $this->render('update', [
-            'model' => $model,
+            'userModel' => $userModel,
         ]);
     }
 
