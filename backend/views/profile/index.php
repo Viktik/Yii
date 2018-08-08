@@ -35,7 +35,14 @@ use yii\widgets\ActiveForm;
                         <td>Email</td>
                         <td><?= $user->email ?></td>
                     </tr>
-
+                    <tr>
+                        <td>Phone</td>
+                        <td><?= $user->phone ?></td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td><?= $user->gender ?></td>
+                    </tr>
                     <tr>
                         <td>Creation date</td>
                         <td><?= date('H:i D-m-Y', $user->created_at) ?></td>

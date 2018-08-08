@@ -9,9 +9,12 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use common\models\UploadForm;
 use yii\web\UploadedFile;
+use  common\models\User;
 
 class ProfileController extends Controller
 {
+    public $userClosed;
+
     public function behaviors()
     {
         return [
@@ -36,7 +39,8 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         $model = new UploadForm();
-        $user = Yii::$app->user->identity;
+        $this->userClosed = Yii::$app->user->identity;
+        $user = User::findIdentity($this->userClosed->id);
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
