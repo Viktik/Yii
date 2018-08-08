@@ -7,6 +7,8 @@ namespace backend\controllers;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
+use common\models\UploadForm;
+use yii\web\UploadedFile;
 
 class ProfileController extends Controller
 {
@@ -33,7 +35,16 @@ class ProfileController extends Controller
 
     public function actionIndex()
     {
+        $model = new UploadForm();
         $user = Yii::$app->user->identity;
-        return $this->render('index', compact('user'));
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload($filename = 'user' . $user->id)) {
+                // file is uploaded successfully
+                return $this->render('index', compact('user', 'model'));
+            }
+        }
+        return $this->render('index', compact('user', 'model'));
     }
 }
