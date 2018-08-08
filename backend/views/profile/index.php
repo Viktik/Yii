@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
             <div class="col-md-3 col-lg-3 " align="center">
 
                 <?php if (file_exists("uploads/user$user->id.jpg")) { ?>
-                    <img src="/uploads/user<?= $user->id ?>.jpg" width="200" height="211" alt="">
+                    <img src="/uploads/user<?=$user->id ?>.jpg" width="200" height="211" alt="">
                 <?php } else { ?>
                     <img src="/uploads/default.jpg" width="200" height="211" alt=""><?php
                 } ?>
