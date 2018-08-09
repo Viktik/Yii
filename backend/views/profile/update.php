@@ -1,18 +1,46 @@
 <?php
+
+/* @var $this yii\web\View */
+/* @var $form yii\bootstrap\ActiveForm */
+/* @var $model \common\models\SignupForm */
+
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
+
+$this->title = 'Update';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <div class="user-form">
+    <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php $form = ActiveForm::begin(); ?>
+    <p>Please fill out the following fields to update your profile:</p>
 
-    <?= $form->field($userModel, 'phone')->textInput() ?>
+    <div class="row">
+        <div class="col-lg-5">
+            <?php $form = ActiveForm::begin();
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            $params = [
+                'prompt' => ''
+            ];
+
+            $options = [
+                'male' => 'male',
+                'female' => 'female',
+            ];
+            ?>
+
+            <?= $form->field($model, 'gender')->dropDownList($options, $params); ?>
+
+            <?= $form->field($model, 'email') ?>
+
+            <?= $form->field($model, 'phone') ?>
+
+
+            <div class="form-group">
+                <?= Html::submitButton('Submit', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
+            </div>
+
+            <?php ActiveForm::end(); ?>
+        </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

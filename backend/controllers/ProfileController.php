@@ -4,6 +4,7 @@
 
 namespace backend\controllers;
 
+use common\models\SignupForm;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -52,17 +53,16 @@ class ProfileController extends Controller
 
     public function actionUpdate()
     {
-        $userModel = $this->findModel();
-
-        if (Yii::$app->request->post()) {
-            $userModel->phone = '555555555555';
-            //$userModel->phone = Yii::$app->request->post('phone');
-            $userModel->save();
-            return $this->redirect(['profile/index']);
+        $model = new SignupForm();
+        $currentUser = $this->findModel();
+        if ($model->load(Yii::$app->request->post())) {
+            if ($user = $model->update($currentUser)) {
+                    return $this->redirect(['profile/index']);
+            }
         }
 
         return $this->render('update', [
-            'userModel' => $userModel,
+            'model' => $model,
         ]);
     }
 
