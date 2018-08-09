@@ -6,6 +6,7 @@ use Yii;
 use common\models\posts;
 use common\models\user;
 use backend\models\PostsSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -22,7 +23,7 @@ class PostsController extends Controller
     {
         return [
             'access' => [
-                'class' => \yii\filters\AccessControl::class,
+                'class' => AccessControl::class,
                 'rules' => [
                     [
                         'allow' => true,
@@ -143,5 +144,22 @@ class PostsController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+
+    public function actionUserCreate()
+    {
+        $user_id = Yii::$app->user->identity->id;
+
+        $model = new posts();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['profile/index']);
+        }
+
+        return $this->render('userCreate', [
+            'model' => $model,
+            'user_id' => $user_id,
+        ]);
     }
 }
