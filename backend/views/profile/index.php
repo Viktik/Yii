@@ -52,7 +52,7 @@ use yii\helpers\Html;
 
                     <tr>
                         <td>Posts quantity</td>
-                        <td><?= $quantity ?></td>
+                        <td><a href="<?= Yii::$app->urlManager->createUrl(["profile/posts"])?>"><?=$quantity?></a></td>
                     </tr>
 
                     </tbody>
