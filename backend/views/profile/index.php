@@ -50,9 +50,14 @@ use yii\helpers\Html;
                         <td><?= date('H:i D-m-Y', $user->created_at) ?></td>
                     </tr>
 
+                    <tr>
+                        <td>Posts quantity</td>
+                        <td><?= $quantity ?></td>
+                    </tr>
+
                     </tbody>
                 </table>
-                <?= Html::a('Update', ['update', 'id' => $user->id], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('Update', ['update'], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('New Post', ['create'], ['class' => 'btn btn-primary']) ?>
             </div>
         </div>

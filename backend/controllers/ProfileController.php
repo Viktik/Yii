@@ -41,21 +41,25 @@ class ProfileController extends Controller
     {
         $model = new UploadForm();
         $user = $this->findModel();
+        $quantity = Posts::find()
+            ->where(['user_id' => $user->id])
+            ->count();
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             if ($model->upload($filename = 'user' . $user->id)) {
                 // file is uploaded successfully
-                return $this->render('index', compact('user', 'model'));
+                return $this->render('index', compact('user', 'model', 'quantity'));
             }
         }
-        return $this->render('index', compact('user', 'model'));
+        return $this->render('index', compact('user', 'model', 'quantity'));
     }
 
     public function actionUpdate()
     {
         $model = new SignupForm();
         $currentUser = $this->findModel();
+
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->update($currentUser)) {
                     return $this->redirect(['profile/index']);
