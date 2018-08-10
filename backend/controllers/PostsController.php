@@ -145,21 +145,4 @@ class PostsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-
-    public function actionUserCreate()
-    {
-        $user_id = Yii::$app->user->identity->id;
-
-        $model = new posts();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['profile/index']);
-        }
-
-        return $this->render('userCreate', [
-            'model' => $model,
-            'user_id' => $user_id,
-        ]);
-    }
 }

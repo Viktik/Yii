@@ -10,7 +10,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use common\models\UploadForm;
 use yii\web\UploadedFile;
-use  common\models\User;
+use common\models\User;
+use common\models\Posts;
 
 class ProfileController extends Controller
 {
@@ -74,5 +75,21 @@ class ProfileController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionCreate()
+    {
+        $user_id = Yii::$app->user->identity->id;
+
+        $model = new posts();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['profile/index']);
+        }
+
+        return $this->render('create', [
+            'model' => $model,
+            'user_id' => $user_id,
+        ]);
     }
 }
