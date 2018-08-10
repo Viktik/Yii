@@ -6,6 +6,7 @@ namespace backend\controllers;
 
 use common\models\SignupForm;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use common\models\UploadForm;
@@ -95,5 +96,28 @@ class ProfileController extends Controller
             'model' => $model,
             'user_id' => $user_id,
         ]);
+    }
+
+    public function actionPosts()
+    {
+        $user = $this->findModel();
+
+        $query = Posts::find()
+            ->select('title, body')
+            ->where(['user_id' => $user->id]);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+        /*$userPosts = Posts::find()
+            ->select('title, body')
+            ->where(['user_id' => $user->id])
+            ->all();*/
+
+        return $this->render('posts', compact('dataProvider'));
     }
 }

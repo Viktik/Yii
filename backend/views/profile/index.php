@@ -59,6 +59,7 @@ use yii\helpers\Html;
                 </table>
                 <?= Html::a('Update', ['update'], ['class' => 'btn btn-primary']) ?>
                 <?= Html::a('New Post', ['create'], ['class' => 'btn btn-primary']) ?>
+                <?= Html::a('My Posts', ['posts'], ['class' => 'btn btn-primary']) ?>
             </div>
         </div>
     </div>
