@@ -55,10 +55,8 @@ class ProfileController extends Controller
     {
         $model = new SignupForm();
         $currentUser = $this->findModel();
-        if ($model->load(Yii::$app->request->post())) {
-            if ($user = $model->update($currentUser)) {
-                    return $this->redirect(['profile/index']);
-            }
+        if ($model->load(Yii::$app->request->post()) && $model->update($currentUser)) {
+            return $this->redirect(['profile/index']);
         }
 
         return $this->render('update', [
