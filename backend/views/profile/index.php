@@ -17,13 +17,15 @@ use yii\helpers\Html;
                 <?php } else { ?>
                     <img src="/uploads/default.jpg" width="200" height="211" alt=""><?php
                 } ?>
-                <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+                <? if ($id == null) { ?>
+                    <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
 
-                <?= $form->field($model, 'imageFile')->fileInput() ?>
+                    <?= $form->field($model, 'imageFile')->fileInput() ?>
 
-                <button>Submit</button>
+                    <button>Submit</button>
 
-                <?php ActiveForm::end() ?>
+                    <?php ActiveForm::end();
+                } ?>
             </div>
 
             <div class=" col-md-9 col-lg-9 ">
@@ -52,14 +54,17 @@ use yii\helpers\Html;
 
                     <tr>
                         <td>Posts quantity</td>
-                        <td><a href="<?= Yii::$app->urlManager->createUrl(["profile/posts"])?>"><?=$quantity?></a></td>
+                        <td><a href="<?= Yii::$app->urlManager->createUrl(["profile/posts?id=$id"])?>"><?=$quantity?></a></td>
                     </tr>
 
                     </tbody>
                 </table>
-                <?= Html::a('Update', ['update'], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('New Post', ['create'], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('My Posts', ['posts'], ['class' => 'btn btn-primary']) ?>
+                <? if ($id == null) { ?>
+                    <?= Html::a('Update', ['update'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('New Post', ['create'], ['class' => 'btn btn-primary']) ?>
+                    <?= Html::a('My Posts', ['posts'], ['class' => 'btn btn-primary']) ?>
+                    <?
+                } ?>
             </div>
         </div>
     </div>

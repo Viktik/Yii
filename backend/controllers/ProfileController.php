@@ -38,10 +38,10 @@ class ProfileController extends Controller
         ];
     }
 
-    public function actionIndex()
+    public function actionIndex($id = null)
     {
+        $user = $this->findModel($id);
         $model = new UploadForm();
-        $user = $this->findModel();
         $quantity = Posts::find()
             ->where(['user_id' => $user->id])
             ->count();
@@ -50,10 +50,10 @@ class ProfileController extends Controller
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
             if ($model->upload($filename = 'user' . $user->id)) {
                 // file is uploaded successfully
-                return $this->render('index', compact('user', 'model', 'quantity'));
+                return $this->render('index', compact('user', 'model', 'quantity', 'id'));
             }
         }
-        return $this->render('index', compact('user', 'model', 'quantity'));
+        return $this->render('index', compact('user', 'model', 'quantity', 'id'));
     }
 
     public function actionUpdate()
@@ -72,9 +72,11 @@ class ProfileController extends Controller
         ]);
     }
 
-    protected function findModel()
+    protected function findModel($id = null)
     {
-        $id = Yii::$app->user->identity->id;
+        if ($id == null){
+            $id = Yii::$app->user->identity->id;
+        }
         if (($model = User::findOne($id)) !== null) {
             return $model;
         }
@@ -98,9 +100,9 @@ class ProfileController extends Controller
         ]);
     }
 
-    public function actionPosts()
+    public function actionPosts($id = null)
     {
-        $user = $this->findModel();
+        $user = $this->findModel($id);
 
         $query = Posts::find()
             ->select('title, body')
@@ -119,5 +121,21 @@ class ProfileController extends Controller
             ->all();*/
 
         return $this->render('posts', compact('dataProvider'));
+    }
+
+    public function actionDelete()
+    {
+        $query = User::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 20,
+            ],
+        ]);
+
+        return $this->render('list', [
+            'dataProvider' => $dataProvider,
+        ]);
     }
 }
