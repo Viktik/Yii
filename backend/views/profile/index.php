@@ -64,6 +64,10 @@ use yii\helpers\Html;
                     <?= Html::a('New Post', ['create'], ['class' => 'btn btn-primary']) ?>
                     <?= Html::a('My Posts', ['posts'], ['class' => 'btn btn-primary']) ?>
                     <?
+                } elseif ($isSub == false) {
+                    echo Html::a('Subscribe', ["subscribe?user_id=$user->id"], ['class' => 'btn btn-primary']);
+                } else {
+                    echo Html::a('Unsubscribe', ["unsubscribe?user_id=$user->id"], ['class' => 'btn btn-primary']);
                 } ?>
             </div>
         </div>
