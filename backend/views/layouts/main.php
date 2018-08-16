@@ -44,6 +44,7 @@ AppAsset::register($this);
             ['label' => 'Menu', 'items' => [
                 ['label' => 'Posts', 'url' => ['/posts/index']],
                 ['label' => 'Users', 'url' => ['/user/index']],
+                ['label' => 'Users List', 'url' => ['/user/userslist']],
             ]],
         ];
         $menuItems[] = '<li>'

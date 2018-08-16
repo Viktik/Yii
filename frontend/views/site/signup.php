@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \frontend\models\SignupForm */
+/* @var $model \common\models\SignupForm */
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
@@ -17,11 +17,25 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
+            <?php $form = ActiveForm::begin(['id' => 'form-signup']);
+
+            $params = [
+                'prompt' => ''
+            ];
+
+            $options = [
+                'male' => 'male',
+                'female' => 'female',
+            ];
+            ?>
 
                 <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
 
+                <?= $form->field($model, 'gender')->dropDownList($options, $params); ?>
+
                 <?= $form->field($model, 'email') ?>
+
+                <?= $form->field($model, 'phone') ?>
 
                 <?= $form->field($model, 'password')->passwordInput() ?>
 
