@@ -165,4 +165,21 @@ class ProfileController extends Controller
         $model->save();
         return $this->redirect(["profile/index?id=$user_id"]);
     }
+
+    public function actionNews()
+    {
+        $subscriber_id = Yii::$app->user->identity->id;
+        $subscribesAll = Subscribes::find()
+            ->select('user_id')
+            ->where(['subscriber_id' => $subscriber_id,
+                     'status' => 1])
+            ->asArray()
+            ->all();
+        $subscribes = array_column($subscribesAll, 'user_id');
+        $posts = Posts::find()
+            ->select('title, body')
+            ->where(['user_id' => $subscribes])
+            ->orderBy('updated_at DESC')
+            ->all();
+    }
 }
