@@ -128,7 +128,7 @@ class ProfileController extends Controller
         $user = $this->findModel($id);
 
         $query = Posts::find()
-            ->select('title, body')
+            ->select('title, body, id')
             ->where(['user_id' => $user->id]);
 
         $dataProvider = new ActiveDataProvider([
