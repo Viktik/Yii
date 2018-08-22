@@ -14,7 +14,7 @@ echo GridView::widget([
         'email',
         ['class' => 'yii\grid\ActionColumn',
             'buttons'=>[
-                'view'=>function ($model) {
+                'view'=>function ($url, $model) {
                     $customurl=Yii::$app->getUrlManager()->createUrl(['profile/index','id'=>$model['id']]); //$model->id для AR
                     return \yii\helpers\Html::a( '<span class="glyphicon glyphicon-eye-open"></span>', $customurl,
                         ['title' => Yii::t('yii', 'View'), 'data-pjax' => '0']);

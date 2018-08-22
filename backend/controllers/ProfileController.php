@@ -1,7 +1,5 @@
 <?php
 
-
-
 namespace backend\controllers;
 
 use common\models\SignupForm;
@@ -134,10 +132,10 @@ class ProfileController extends Controller
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => [
-                'pageSize' => 20,
+                'pageSize' => 10,
             ],
         ]);
-        return $this->render('posts', compact('dataProvider'));
+        return $this->render('posts', compact('dataProvider', 'user'));
     }
 
     public function actionSubscribe($user_id)
@@ -169,17 +167,31 @@ class ProfileController extends Controller
     public function actionNews()
     {
         $subscriber_id = Yii::$app->user->identity->id;
+
         $subscribesAll = Subscribes::find()
             ->select('user_id')
             ->where(['subscriber_id' => $subscriber_id,
                      'status' => 1])
             ->asArray()
             ->all();
+
         $subscribes = array_column($subscribesAll, 'user_id');
-        $posts = Posts::find()
-            ->select('title, body')
-            ->where(['user_id' => $subscribes])
-            ->orderBy('updated_at DESC')
-            ->all();
+
+        $query = Posts::find()
+            ->leftJoin('user', 'user.id = posts.user_id')
+            ->select(['posts.id', 'posts.title', 'posts.body', 'user.username'])
+            ->from('posts')
+            ->where(['posts.user_id' => $subscribes])
+            ->orderBy('posts.updated_at DESC');
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
+        ]);
+
+        return $this->render('news', compact('dataProvider'));
+
     }
 }
