@@ -9,7 +9,7 @@ echo GridView::widget([
     'columns' => [
         ['class' => 'yii\grid\SerialColumn'],
         //$id ='id',
-        'user',
+        'username',
         'title',
         'body',
     ]

@@ -178,11 +178,12 @@ class ProfileController extends Controller
         $subscribes = array_column($subscribesAll, 'user_id');
 
         $query = Posts::find()
-            ->leftJoin('user', 'user.id = posts.user_id')
             ->select(['posts.id', 'posts.title', 'posts.body', 'user.username'])
             ->from('posts')
+            ->joinWith('user')
             ->where(['posts.user_id' => $subscribes])
-            ->orderBy('posts.updated_at DESC');
+            ->orderBy('posts.updated_at DESC')
+            ->asArray();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -190,7 +191,8 @@ class ProfileController extends Controller
                 'pageSize' => 10,
             ],
         ]);
-
+        /*print_r($dataProvider);
+        exit;*/
         return $this->render('news', compact('dataProvider'));
 
     }
