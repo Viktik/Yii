@@ -145,4 +145,10 @@ class PostsController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionLike($postId)
+    {
+        $post = Posts::findOne($postId);
+
+    }
 }

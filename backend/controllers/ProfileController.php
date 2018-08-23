@@ -126,7 +126,6 @@ class ProfileController extends Controller
         $user = $this->findModel($id);
 
         $query = Posts::find()
-            ->select('title, body, id')
             ->where(['user_id' => $user->id]);
 
         $dataProvider = new ActiveDataProvider([
@@ -178,7 +177,7 @@ class ProfileController extends Controller
         $subscribes = array_column($subscribesAll, 'user_id');
 
         $query = Posts::find()
-            ->select(['posts.id', 'posts.title', 'posts.body', 'user.username'])
+            ->select(['posts.id', 'posts.title', 'posts.body', 'posts.like', 'posts.dislike', 'user.username'])
             ->from('posts')
             ->joinWith('user')
             ->where(['posts.user_id' => $subscribes])
@@ -191,8 +190,7 @@ class ProfileController extends Controller
                 'pageSize' => 10,
             ],
         ]);
-        /*print_r($dataProvider);
-        exit;*/
+
         return $this->render('news', compact('dataProvider'));
 
     }

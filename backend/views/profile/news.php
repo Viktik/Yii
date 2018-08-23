@@ -12,5 +12,7 @@ echo GridView::widget([
         'username',
         'title',
         'body',
+        'like',
+        'dislike',
     ]
 ]);

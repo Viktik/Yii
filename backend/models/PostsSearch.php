@@ -18,7 +18,7 @@ class PostsSearch extends posts
     public function rules()
     {
         return [
-            [['id', 'user_id'], 'integer'],
+            [['id', 'user_id', 'like', 'dislike'], 'integer'],
             [['title', 'body'], 'safe'],
         ];
     }
@@ -64,7 +64,9 @@ class PostsSearch extends posts
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'body', $this->body]);
+            ->andFilterWhere(['like', 'body', $this->body])
+            ->andFilterWhere(['like', 'like', $this->like])
+            ->andFilterWhere(['like', 'dislike', $this->dislike]);
 
         return $dataProvider;
     }

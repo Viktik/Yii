@@ -12,6 +12,8 @@ if ($user->id == Yii::$app->user->identity->id) {
             //$id ='id',
             'title',
             'body',
+            'like',
+            'dislike',
             ['class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'view' => function ($url, $model, $id) {
@@ -32,6 +34,8 @@ if ($user->id == Yii::$app->user->identity->id) {
             //$id ='id',
             'title',
             'body',
+            'like',
+            'dislike',
             /*['class' => 'yii\grid\ActionColumn',
                 'buttons' => [
                     'view' => function ($url, $model, $id) {
