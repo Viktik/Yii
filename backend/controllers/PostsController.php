@@ -149,6 +149,14 @@ class PostsController extends Controller
     public function actionLike($postId)
     {
         $post = Posts::findOne($postId);
+        $post->like++;
+        $post->save();
+    }
 
+    public function actionDislike($postId)
+    {
+        $post = Posts::findOne($postId);
+        $post->dislike++;
+        $post->save();
     }
 }
