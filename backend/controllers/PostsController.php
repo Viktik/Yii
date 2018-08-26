@@ -151,6 +151,7 @@ class PostsController extends Controller
         $post = Posts::findOne($postId);
         $post->like++;
         $post->save();
+        return $this->redirect(['profile/news']);
     }
 
     public function actionDislike($postId)
@@ -158,5 +159,6 @@ class PostsController extends Controller
         $post = Posts::findOne($postId);
         $post->dislike++;
         $post->save();
+        return $this->redirect(['profile/news']);
     }
 }
