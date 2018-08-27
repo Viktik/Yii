@@ -4,14 +4,17 @@
 
 namespace backend\controllers;
 
+use common\models\SignupForm;
 use Yii;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use common\models\UploadForm;
 use yii\web\UploadedFile;
+use  common\models\User;
 
 class ProfileController extends Controller
 {
+
     public function behaviors()
     {
         return [
@@ -36,7 +39,7 @@ class ProfileController extends Controller
     public function actionIndex()
     {
         $model = new UploadForm();
-        $user = Yii::$app->user->identity;
+        $user = $this->findModel();
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
@@ -46,5 +49,28 @@ class ProfileController extends Controller
             }
         }
         return $this->render('index', compact('user', 'model'));
+    }
+
+    public function actionUpdate()
+    {
+        $model = new SignupForm();
+        $currentUser = $this->findModel();
+        if ($model->load(Yii::$app->request->post()) && $model->update($currentUser)) {
+            return $this->redirect(['profile/index']);
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
+    }
+
+    protected function findModel()
+    {
+        $id = Yii::$app->user->identity->id;
+        if (($model = User::findOne($id)) !== null) {
+            return $model;
+        }
+
+        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

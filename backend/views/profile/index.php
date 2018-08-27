@@ -1,5 +1,7 @@
 <?php
 use yii\widgets\ActiveForm;
+use yii\helpers\Html;
+
 /** @var \common\models\UploadForm $model */
 ?>
 <div class="panel panel-info">
@@ -35,7 +37,14 @@ use yii\widgets\ActiveForm;
                         <td>Email</td>
                         <td><?= $user->email ?></td>
                     </tr>
-
+                    <tr>
+                        <td>Phone</td>
+                        <td><?= $user->phone ?></td>
+                    </tr>
+                    <tr>
+                        <td>Gender</td>
+                        <td><?= $user->gender ?></td>
+                    </tr>
                     <tr>
                         <td>Creation date</td>
                         <td><?= date('H:i D-m-Y', $user->created_at) ?></td>
@@ -43,6 +52,7 @@ use yii\widgets\ActiveForm;
 
                     </tbody>
                 </table>
+                <?= Html::a('Update', ['update', 'id' => $user->id], ['class' => 'btn btn-primary']) ?>
             </div>
         </div>
     </div>
