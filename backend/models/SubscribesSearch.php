@@ -5,12 +5,12 @@ namespace backend\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\posts;
+use common\models\subscribes;
 
 /**
- * PostsSearch represents the model behind the search form of `common\models\posts`.
+ * SubscribesSearch represents the model behind the search form of `common\models\subscribes`.
  */
-class PostsSearch extends posts
+class SubscribesSearch extends subscribes
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,7 @@ class PostsSearch extends posts
     public function rules()
     {
         return [
-            [['id', 'user_id', 'like', 'dislike'], 'integer'],
-            [['title', 'body'], 'safe'],
+            [['id', 'subscriber_id', 'user_id', 'status'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class PostsSearch extends posts
      */
     public function search($params)
     {
-        $query = posts::find();
+        $query = subscribes::find();
 
         // add conditions that should always apply here
 
@@ -60,13 +59,10 @@ class PostsSearch extends posts
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'subscriber_id' => $this->subscriber_id,
             'user_id' => $this->user_id,
+            'status' => $this->status,
         ]);
-
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'body', $this->body])
-            ->andFilterWhere(['like', 'like', $this->like])
-            ->andFilterWhere(['like', 'dislike', $this->dislike]);
 
         return $dataProvider;
     }

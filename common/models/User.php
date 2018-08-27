@@ -15,6 +15,8 @@ use yii\web\IdentityInterface;
  * @property string $password_hash
  * @property string $password_reset_token
  * @property string $email
+ * @property string $phone
+ * @property string $gender
  * @property string $auth_key
  * @property integer $status
  * @property integer $created_at
@@ -189,6 +191,6 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getPosts()
     {
-        return $this->hasMany(Posts::className(),['user_id' => 'id']);
+        return $this->hasMany(Posts::class,['user_id' => 'id']);
     }
 }
